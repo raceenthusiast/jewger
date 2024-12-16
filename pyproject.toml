@@ -5,7 +5,7 @@ description = "frogger but with a jew crossing the street during a marathon"
 authors = [
     {name = "zeph", email = "nigger@cia.gov"},
 ]
-dependencies = ["pygame>=2.6.1"]
+dependencies = ["pygame>=2.6.1", "moviepy>=2.1.1", "opencv-python>=4.10.0.84"]
 requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "MIT"}
