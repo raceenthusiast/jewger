@@ -24,6 +24,10 @@ BLACK = (0, 0, 0)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Jewger")
 
+# sounds
+collision_sound = pygame.mixer.Sound('collision.mp3')
+victory_sound = pygame.mixer.Sound('victory.mp3')
+
 class Player:
     def __init__(self, x, y):
         self.x = x
@@ -69,6 +73,8 @@ class Runner:
 def play_victory_video():
     # Load video with audio using moviepy
     video = VideoFileClip('victory.mp4')
+    pygame.mixer.music.set_volume(0.3)  # Reduce to 30% volume
+    victory_sound.play()
     
     # Get video properties
     frame_width = int(video.w)
@@ -151,6 +157,7 @@ def play_victory_video():
 def play_background_music():
     pygame.mixer.music.load('jogger.mp3')
     pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(1.0)  # Return to full volume
 
 def game_loop():
     clock = pygame.time.Clock()
@@ -192,6 +199,7 @@ def game_loop():
         # Check collisions
         for runner in runners:
             if player.rect.colliderect(runner.rect):
+                collision_sound.play()
                 player.y = SCREEN_HEIGHT - PLAYER_SIZE - 10
                 player.rect.y = player.y
 
